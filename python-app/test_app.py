@@ -19,7 +19,7 @@ class TestApp(TestCase):
         response = self.client.post(url_for('greet'), data={'name': 'John', 'age': 25}, follow_redirects=True)
         self.assert200(response)
         self.assertIn(b"Hello, John!", response.data)
-        self.assertIn(b"You are 25 years old.", response.data)
+        self.assertIn(b"You are 25 years old!", response.data)
 
 if __name__ == '__main__':
     unittest.main()
