@@ -102,3 +102,21 @@
     - Het commando dat je hiervoor gebruikt in het script is: “oc start-build $(params.buildconfig-name) -n (naam van je namespace)
 - Maak een Pipeline genaamd "build-pipeline" aan die de Tasks "git-clone", "python-test", "start-build" combineren.
 - Maak een PipelineRun aan die de Pipeline "build-pipeline" uitvoert. 
+
+# Deel 10 - Triggers:
+- Maak een EventListener aan met als interceptor github en als eventtype pull request (tip: zie documentatie Tekton)
+- Maak een EventListenerRoute aan (het exposen van je el-service) (zie file deel_10)
+- Maak een TriggerBinding aan met de parameter “revision” met als value “$(body.pull_request.head.sha)”. Dit zorgt ervoor dat de SHA van de commit ‘Head’ wordt meegegeven als data. 
+- Maak een TriggerTemplate aan die de test-pipeline van deel 8 aftrapt. 
+- De parameter “revision” heeft in de TriggerTemplate de value “$(tt.params.revision)”
+- Creëer een webhook op Github onder ‘repository settings’:
+- Payload URL: Vul hier de url in van de EventlistenerRoute
+- Content type: application/json
+- Secret: leeg (benodigd voor private repo’s. Als je repo nog op private staat, is het handig deze eerst naar public te zetten) (Uitdaging: als alles gelukt is, probeer dan eens je repo private te maken, een secret aan te maken en deze te verwerken in je EventListener)
+- Selecteer ‘let me select individual events’ en kies dan ‘pull requests’
+- Zorg dat je repo op public staat
+- Maak in je CLI een branch aan en 
+- verander in de ‘index.html’ bijvoorbeeld iets in de title. (Let op: Het kan zijn dat je de test_app.py hierdoor ook moet wijzigen)
+- Add, commit en push de verandering naar GitHub. 
+- Creëer een pull request van je branch naar de main branch. 
+- Zie in OpenShift wat er gebeurt…
