@@ -43,3 +43,21 @@
 - Voor de eerste step gebruiken we het write-message script van deel 4. 
 - Maak een tweede step die het bericht van step 1 uitleest en print in de logs. 
 - Gebruik als image ‘alpine’
+
+# Deel 6 - Shared message - Pipeline - Workspace: 
+- Maak een Task “read-message” aan die bestaat uit het script van step 2 van de Task uit deel 5.
+- Maak een Pipeline aan die de volgende 2 Tasks bevat:
+    - De Task “write-message” uit deel 4 (die met 1 step)
+    - De Task “read-message”
+- Voor de PipelineRun maken we nu gebruik van een PersistentVolumeClaim om ons bericht in weg te schrijven. Deze kun je in de PipelineRun als volgt configureren: 
+####	spec: 
+####           …
+####	   workspaces:
+####    	     - name: pipeline-space
+####                volumeClaimTemplate:
+####        	  spec:
+####          	    accessModes:
+####                      - ReadWriteOnce
+####                    resources:
+####                      requests:
+####                        storage: 128Mi
