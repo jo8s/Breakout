@@ -72,4 +72,4 @@
 ###      ls -la
 - Controleer of je geforkte repo op public staat.
 - Zorg dat de URL in de TaskRun naar jouw fork repo en juiste revision (branch) verwijst.
-- De workspace in de TaskRun wordt net zo geconfigureerd als in deel 6. 
+- De workspace in de TaskRun wordt net zo geconfigureerd als in deel 6 (dus de volumeClaimTemplate). 
