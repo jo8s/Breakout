@@ -61,3 +61,15 @@
 ####                    resources:
 ####                      requests:
 ####                        storage: 128Mi
+
+# Deel 7 - Repo clonen:
+- Maak een Task “git-clone” en TaskRun aan. Het image dat we gebruiken is “alpine/git”. Deze Task bevat het volgende script: 
+###      #!/usr/bin/env sh
+###      cd $(workspaces.source-code.path)
+###      git clone $(params.url)
+###      cd Breakout
+###      git checkout $(params.revision)
+###      ls -la
+- Controleer of je geforkte repo op public staat.
+- Zorg dat de URL in de TaskRun naar jouw fork repo en juiste revision (branch) verwijst.
+- De workspace in de TaskRun wordt net zo geconfigureerd als in deel 6. 
